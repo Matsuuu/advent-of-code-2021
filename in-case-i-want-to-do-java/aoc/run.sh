@@ -1,3 +1,3 @@
 #!/bin/bash
-mvn clean package
-java -jar target/aoc-1.0-SNAPSHOT.jar
+./mvnw clean package
+java -jar target/advent-of-code-1.0-SNAPSHOT.jar

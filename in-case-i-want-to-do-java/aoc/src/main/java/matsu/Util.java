@@ -37,6 +37,10 @@ public class Util {
         }
     }
 
+    public static Long parseLong(String n) {
+        return Long.parseLong(n);
+    }
+
     public static String readFile(String fileName) {
         return getInstance().readFileResource(fileName);
     }
