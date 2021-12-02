@@ -3,6 +3,7 @@ package matsu;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.ToLongFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -16,13 +17,9 @@ public class DayTwo {
                 .map(toNavAction)
                 .toList();
 
-        Long horiz = navActions.stream().filter(isForward)
-                .map(NavAction::amount)
-                .mapToLong(Long::longValue).sum();
+        Long horiz = navActions.stream().filter(isForward).mapToLong(NavAction::amount).sum();
 
-        Long depth = navActions.stream().filter(Predicate.not(isForward))
-                .map(getDepthChange)
-                .mapToLong(Long::longValue).sum();
+        Long depth = navActions.stream().filter(Predicate.not(isForward)).mapToLong(getDepthChange).sum();
 
         System.out.println("Horizontal: " + horiz);
         System.out.println("Depth: " + depth);
@@ -37,15 +34,13 @@ public class DayTwo {
                 .map(toNavAction)
                 .toList();
 
-        Long horiz = navActions.stream().filter(isForward)
-                .map(NavAction::amount)
-                .mapToLong(Long::longValue).sum();
+        Long horiz = navActions.stream().filter(isForward).mapToLong(NavAction::amount).sum();
 
         Long depth = navActions.stream().reduce(new NavData(0L, 0L),
                 (op, next) ->
                     isForward.test(next)
                             ? new NavData(op.aim, op.depth + op.aim * next.amount)
-                            : new NavData(op.aim + getDepthChange.apply(next), op.depth)
+                            : new NavData(op.aim + getDepthChange.applyAsLong(next), op.depth)
                 ,
                 (op1, op2) -> op1).depth;
 
@@ -60,7 +55,7 @@ public class DayTwo {
 
     static Predicate<NavAction> isForward = navAction -> navAction.dir.equals("forward");
 
-    static Function<NavAction, Long> getDepthChange = navAction -> navAction.dir.equals("up") ? navAction.amount * -1 : navAction.amount;
+    static ToLongFunction<NavAction> getDepthChange = navAction -> navAction.dir.equals("up") ? navAction.amount * -1 : navAction.amount;
 
     static Function<String[], NavAction> toNavAction = (rowSplit) -> new NavAction(rowSplit[0], Util.parseLong(rowSplit[1]));
 
