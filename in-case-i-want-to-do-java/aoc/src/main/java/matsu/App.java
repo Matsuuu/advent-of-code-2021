@@ -11,6 +11,5 @@ public class App {
         //DayOne.solveSecond();
 
         DayTwo.solveFirst();
-        DayTwo.solveTwo();
     }
 }

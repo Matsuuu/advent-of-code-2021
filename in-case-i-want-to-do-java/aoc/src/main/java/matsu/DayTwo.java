@@ -21,32 +21,19 @@ public class DayTwo {
 
         Long depth = navActions.stream().filter(Predicate.not(isForward)).mapToLong(getDepthChange).sum();
 
-        System.out.println("Horizontal: " + horiz);
-        System.out.println("Depth: " + depth);
-        System.out.println(horiz * depth);
-    }
-
-    public static void solveTwo() {
-        String input = Util.readFile("input2.txt");
-
-        List<NavAction> navActions = Stream.of(input.split("\n"))
-                .map(row -> row.split(" "))
-                .map(toNavAction)
-                .toList();
-
-        Long horiz = navActions.stream().filter(isForward).mapToLong(NavAction::amount).sum();
-
-        Long depth = navActions.stream().reduce(new NavData(0L, 0L),
+        Long realDepth = navActions.stream().reduce(new NavData(0L, 0L),
                 (op, next) ->
-                    isForward.test(next)
-                            ? new NavData(op.aim, op.depth + op.aim * next.amount)
-                            : new NavData(op.aim + getDepthChange.applyAsLong(next), op.depth)
+                        isForward.test(next)
+                                ? new NavData(op.aim, op.depth + op.aim * next.amount)
+                                : new NavData(op.aim + getDepthChange.applyAsLong(next), op.depth)
                 ,
                 (op1, op2) -> op1).depth;
-
         System.out.println("Horizontal: " + horiz);
         System.out.println("Depth: " + depth);
         System.out.println(horiz * depth);
+
+        System.out.println("Real Depth: " + realDepth);
+        System.out.println(horiz * realDepth);
     }
 
     record NavAction(String dir, Long amount) {}
