@@ -7,7 +7,10 @@ public class App {
         System.out.print("\033[H\033[2J");
         System.out.flush();
 
-        DayOne.solveFirst();
-        DayOne.solveSecond();
+        //DayOne.solveFirst();
+        //DayOne.solveSecond();
+
+        DayTwo.solveFirst();
+        DayTwo.solveTwo();
     }
 }
