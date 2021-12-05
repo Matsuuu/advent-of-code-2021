@@ -10,6 +10,7 @@ public class App {
         //DayOne.solveFirst();
         //DayOne.solveSecond();
 
-        DayTwo.solveFirst();
+        //DayTwo.solveFirst();
+        DayThree.solve();
     }
 }
