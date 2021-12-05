@@ -1,7 +1,5 @@
 package matsu;
 
-import static matsu.Util.*;
-
 public class App {
     public static void main(String[] args) {
         System.out.print("\033[H\033[2J");
@@ -11,6 +9,7 @@ public class App {
         //DayOne.solveSecond();
 
         //DayTwo.solveFirst();
-        DayThree.solve();
+        //DayThree.solve();
+        DayFour.solve();
     }
 }
